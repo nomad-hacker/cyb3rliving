@@ -1,7 +1,7 @@
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
 import MetadataViews from "../../contracts/MetadataViews.cdc"
-import NFTStorefrontV2 from "../../contracts/NFTStorefrontV2.cdc"
-import KittyItems from "../../contracts/KittyItems.cdc"
+import FlowairbV2 from "../../contracts/FlowairbV2.cdc"
+import HouseListings from "../../contracts/HouseListings.cdc"
 
 pub struct ListingItem {
     pub let name: String
@@ -11,8 +11,8 @@ pub struct ListingItem {
 
     pub let itemID: UInt64
     pub let resourceID: UInt64
-    pub let kind: KittyItems.Kind
-    pub let rarity: KittyItems.Rarity
+    pub let kind: HouseListings.Kind
+    pub let rarity: HouseListings.Rarity
     pub let owner: Address
     pub let price: UFix64
 
@@ -23,8 +23,8 @@ pub struct ListingItem {
         description: String,
         itemID: UInt64,
         resourceID: UInt64,
-        kind: KittyItems.Kind,
-        rarity: KittyItems.Rarity,
+        kind: HouseListings.Kind,
+        rarity: HouseListings.Rarity,
         owner: Address,
         price: UFix64
     ) {
@@ -57,7 +57,7 @@ pub fun dwebURL(_ file: MetadataViews.IPFSFile): String {
 pub fun main(address: Address, listingResourceID: UInt64): ListingItem? {
     let account = getAccount(address)
 
-    if let storefrontRef = account.getCapability<&NFTStorefrontV2.Storefront{NFTStorefrontV2.StorefrontPublic}>(NFTStorefrontV2.StorefrontPublicPath).borrow() {
+    if let storefrontRef = account.getCapability<&FlowairbV2.Storefront{FlowairbV2.StorefrontPublic}>(FlowairbV2.StorefrontPublicPath).borrow() {
 
         if let listing = storefrontRef.borrowListing(listingResourceID: listingResourceID) {
 
@@ -66,7 +66,7 @@ pub fun main(address: Address, listingResourceID: UInt64): ListingItem? {
             let itemID = details.nftID
             let itemPrice = details.salePrice
 
-            if let collection = getAccount(address).getCapability<&KittyItems.Collection{NonFungibleToken.CollectionPublic, KittyItems.KittyItemsCollectionPublic}>(KittyItems.CollectionPublicPath).borrow() {
+            if let collection = getAccount(address).getCapability<&HouseListings.Collection{NonFungibleToken.CollectionPublic, HouseListings.HouseListingsCollectionPublic}>(HouseListings.CollectionPublicPath).borrow() {
 
                 if let item = collection.borrowKittyItem(id: itemID) {
 

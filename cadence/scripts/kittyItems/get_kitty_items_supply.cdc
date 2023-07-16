@@ -1,7 +1,7 @@
-import KittyItems from "../../contracts/KittyItems.cdc"
+import HouseListings from "../../contracts/HouseListings.cdc"
 
-// This scripts returns the number of KittyItems currently in existence.
+// This scripts returns the number of HouseListings currently in existence.
 
 pub fun main(): UInt64 {    
-    return KittyItems.totalSupply
+    return HouseListings.totalSupply
 }

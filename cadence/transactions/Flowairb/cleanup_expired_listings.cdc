@@ -1,4 +1,4 @@
-import NFTStorefrontV2 from "../contracts/NFTStorefrontV2.cdc"
+import FlowairbV2 from "../contracts/FlowairbV2.cdc"
 
 /// Transaction to facilitate the cleanup of the expired listings of a given
 /// storefront resource account holder.
@@ -9,12 +9,12 @@ import NFTStorefrontV2 from "../contracts/NFTStorefrontV2.cdc"
 /// It can be sign/authorize by anyone.
 
 transaction(fromIndex: UInt64, toIndex: UInt64, storefrontAddress: Address) {
-    let storefront: &NFTStorefrontV2.Storefront{NFTStorefrontV2.StorefrontPublic}
+    let storefront: &FlowairbV2.Storefront{FlowairbV2.StorefrontPublic}
 
     prepare(acct: AuthAccount) {
         self.storefront = getAccount(storefrontAddress)
-            .getCapability<&NFTStorefrontV2.Storefront{NFTStorefrontV2.StorefrontPublic}>(
-                NFTStorefrontV2.StorefrontPublicPath
+            .getCapability<&FlowairbV2.Storefront{FlowairbV2.StorefrontPublic}>(
+                FlowairbV2.StorefrontPublicPath
             )!
             .borrow()
             ?? panic("Could not borrow Storefront from provided address")

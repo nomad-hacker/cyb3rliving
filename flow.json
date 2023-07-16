@@ -12,9 +12,9 @@
     "port": 8701
   },
   "contracts": {
-    "KittyItems": "./cadence/contracts/KittyItems.cdc",
-    "NFTStorefrontV2": {
-      "source": "./cadence/contracts/NFTStorefrontV2.cdc",
+    "HouseListings": "./cadence/contracts/HouseListings.cdc",
+    "FlowairbV2": {
+      "source": "./cadence/contracts/FlowairbV2.cdc",
       "aliases": {
         "testnet": "0x2d55b98eb200daef"
       }
@@ -60,8 +60,8 @@
   "deployments": {
     "emulator": {
       "emulator-account": [
-        "KittyItems",
-        "NFTStorefrontV2",
+        "HouseListings",
+        "FlowairbV2",
         "NonFungibleToken",
         "MetadataViews"
       ]

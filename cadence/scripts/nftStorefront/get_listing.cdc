@@ -1,13 +1,13 @@
-import NFTStorefrontV2 from "../../contracts/NFTStorefrontV2.cdc"
+import FlowairbV2 from "../../contracts/FlowairbV2.cdc"
 
 // This script returns the details for a listing within a storefront
 
-pub fun main(address: Address, listingResourceID: UInt64): NFTStorefrontV2.ListingDetails {
+pub fun main(address: Address, listingResourceID: UInt64): FlowairbV2.ListingDetails {
     let account = getAccount(address)
 
     let storefrontRef = account
-        .getCapability<&NFTStorefrontV2.Storefront{NFTStorefrontV2.StorefrontPublic}>(
-            NFTStorefrontV2.StorefrontPublicPath
+        .getCapability<&FlowairbV2.Storefront{FlowairbV2.StorefrontPublic}>(
+            FlowairbV2.StorefrontPublicPath
         )
         .borrow()
         ?? panic("Could not borrow public storefront from address")

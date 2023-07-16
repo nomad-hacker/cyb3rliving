@@ -1,7 +1,7 @@
 import NonFungibleToken from "../../contracts/NonFungibleToken.cdc"
-import KittyItems from "../../contracts/KittyItems.cdc"
-import MetadataViews from "../contracts/MetadataViews.cdc"
-import FungibleToken from "./utility/FungibleToken.cdc"
+import HouseListings from "../../contracts/HouseListings.cdc"
+import MetadataViews from "../../contracts/MetadataViews.cdc"
+import FungibleToken from "../../contracts/FungibleToken.cdc"
 
 // This transction uses the NFTMinter resource to mint a new NFT.
 //
@@ -18,7 +18,7 @@ transaction(
 ) {
 
     // local variable for storing the minter reference
-    let minter: &KittyItems.NFTMinter
+    let minter: &HouseListings.NFTMinter
 
     /// Reference to the receiver's collection
     let recipientCollectionRef: &{NonFungibleToken.CollectionPublic}
@@ -27,22 +27,22 @@ transaction(
     let mintingIDBefore: UInt64
 
     prepare(signer: AuthAccount) {
-        self.mintingIDBefore = KittyItems.totalSupply
+        self.mintingIDBefore = HouseListings.totalSupply
 
         // Borrow a reference to the NFTMinter resource in storage
-        self.minter = signer.borrow<&KittyItems.NFTMinter>(from: KittyItems.MinterStoragePath)
+        self.minter = signer.borrow<&HouseListings.NFTMinter>(from: HouseListings.MinterStoragePath)
             ?? panic("Could not borrow a reference to the NFT minter")
 
         // Borrow the recipient's public NFT collection reference
         self.recipientCollectionRef = getAccount(recipient)
-            .getCapability(KittyItems.CollectionPublicPath)
+            .getCapability(HouseListings.CollectionPublicPath)
             .borrow<&{NonFungibleToken.CollectionPublic}>()
             ?? panic("Could not get receiver reference to the NFT Collection")
     }
 
     execute {
-        let kindValue = KittyItems.Kind(rawValue: kind) ?? panic("invalid kind")
-        let rarityValue = KittyItems.Rarity(rawValue: rarity) ?? panic("invalid rarity")
+        let kindValue = HouseListings.Kind(rawValue: kind) ?? panic("invalid kind")
+        let rarityValue = HouseListings.Rarity(rawValue: rarity) ?? panic("invalid rarity")
 
         // TODO: Add royalty feature to KI using beneficiaries, cuts, and descriptions. At the moment, we don't provide royalties with KI, so this will be an empty list.
         let royalties: [MetadataViews.Royalty] = []
@@ -58,6 +58,6 @@ transaction(
 
     post {
         self.recipientCollectionRef.getIDs().contains(self.mintingIDBefore): "The next NFT ID should have been minted and delivered"
-        KittyItems.totalSupply == self.mintingIDBefore + 1: "The total supply should have been increased by 1"
+        HouseListings.totalSupply == self.mintingIDBefore + 1: "The total supply should have been increased by 1"
     }
 }

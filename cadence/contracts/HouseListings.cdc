@@ -1,10 +1,10 @@
 import NonFungibleToken from "./NonFungibleToken.cdc"
 import MetadataViews from "./MetadataViews.cdc"
 
-pub contract KittyItems: NonFungibleToken {
+pub contract HouseListings: NonFungibleToken {
 
     // totalSupply
-    // The total number of KittyItems that have been minted
+    // The total number of HouseListings that have been minted
     //
     pub var totalSupply: UInt64
 
@@ -89,22 +89,22 @@ pub contract KittyItems: NonFungibleToken {
         pub let id: UInt64
 
         pub fun name(): String {
-            return KittyItems.rarityToString(self.rarity)
+            return HouseListings.rarityToString(self.rarity)
                 .concat(" ")
-                .concat(KittyItems.kindToString(self.kind))
+                .concat(HouseListings.kindToString(self.kind))
         }
         
         pub fun description(): String {
             return "A "
-                .concat(KittyItems.rarityToString(self.rarity).toLower())
+                .concat(HouseListings.rarityToString(self.rarity).toLower())
                 .concat(" ")
-                .concat(KittyItems.kindToString(self.kind).toLower())
+                .concat(HouseListings.kindToString(self.kind).toLower())
                 .concat(" with serial number ")
                 .concat(self.id.toString())
         }
 
         pub fun imageCID(): String {
-            return KittyItems.images[self.kind]![self.rarity]!
+            return HouseListings.images[self.kind]![self.rarity]!
         }
 
         pub fun thumbnail(): MetadataViews.IPFSFile {
@@ -158,7 +158,7 @@ pub contract KittyItems: NonFungibleToken {
                 case Type<MetadataViews.Editions>():
                     // There is no max number of NFTs that can be minted from this contract
                     // so the max edition field value is set to nil
-                    let editionInfo = MetadataViews.Edition(name: "KittyItems NFT Edition", number: self.id, max: nil)
+                    let editionInfo = MetadataViews.Edition(name: "HouseListings NFT Edition", number: self.id, max: nil)
                     let editionList: [MetadataViews.Edition] = [editionInfo]
                     return MetadataViews.Editions(
                         editionList
@@ -175,14 +175,14 @@ pub contract KittyItems: NonFungibleToken {
                     return MetadataViews.ExternalURL("https://kitty-items.flow.com/".concat(self.id.toString()))
                 case Type<MetadataViews.NFTCollectionData>():
                     return MetadataViews.NFTCollectionData(
-                        storagePath: KittyItems.CollectionStoragePath,
-                        publicPath: KittyItems.CollectionPublicPath,
-                        providerPath: /private/KittyItemsCollection,
-                        publicCollection: Type<&KittyItems.Collection{KittyItems.KittyItemsCollectionPublic}>(),
-                        publicLinkedType: Type<&KittyItems.Collection{KittyItems.KittyItemsCollectionPublic,NonFungibleToken.CollectionPublic,NonFungibleToken.Receiver,MetadataViews.ResolverCollection}>(),
-                        providerLinkedType: Type<&KittyItems.Collection{KittyItems.KittyItemsCollectionPublic,NonFungibleToken.CollectionPublic,NonFungibleToken.Provider,MetadataViews.ResolverCollection}>(),
+                        storagePath: HouseListings.CollectionStoragePath,
+                        publicPath: HouseListings.CollectionPublicPath,
+                        providerPath: /private/HouseListingsCollection,
+                        publicCollection: Type<&HouseListings.Collection{HouseListings.HouseListingsCollectionPublic}>(),
+                        publicLinkedType: Type<&HouseListings.Collection{HouseListings.HouseListingsCollectionPublic,NonFungibleToken.CollectionPublic,NonFungibleToken.Receiver,MetadataViews.ResolverCollection}>(),
+                        providerLinkedType: Type<&HouseListings.Collection{HouseListings.HouseListingsCollectionPublic,NonFungibleToken.CollectionPublic,NonFungibleToken.Provider,MetadataViews.ResolverCollection}>(),
                         createEmptyCollectionFunction: (fun (): @NonFungibleToken.Collection {
-                            return <-KittyItems.createEmptyCollection()
+                            return <-HouseListings.createEmptyCollection()
                         })
                     )
                 case Type<MetadataViews.NFTCollectionDisplay>():
@@ -193,7 +193,7 @@ pub contract KittyItems: NonFungibleToken {
                         mediaType: "image/svg+xml"
                     )
                     return MetadataViews.NFTCollectionDisplay(
-                        name: "The KittyItems Collection",
+                        name: "The HouseListings Collection",
                         description: "This collection is used as an example to help you develop your next Flow NFT.",
                         externalURL: MetadataViews.ExternalURL("https://kitty-items.flow.com/"),
                         squareImage: media,
@@ -223,14 +223,14 @@ pub contract KittyItems: NonFungibleToken {
         }
     }
 
-    // This is the interface that users can cast their KittyItems Collection as
-    // to allow others to deposit KittyItems into their Collection. It also allows for reading
-    // the details of KittyItems in the Collection.
-    pub resource interface KittyItemsCollectionPublic {
+    // This is the interface that users can cast their HouseListings Collection as
+    // to allow others to deposit HouseListings into their Collection. It also allows for reading
+    // the details of HouseListings in the Collection.
+    pub resource interface HouseListingsCollectionPublic {
         pub fun deposit(token: @NonFungibleToken.NFT)
         pub fun getIDs(): [UInt64]
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
-        pub fun borrowKittyItem(id: UInt64): &KittyItems.NFT? {
+        pub fun borrowKittyItem(id: UInt64): &HouseListings.NFT? {
             // If the result isn't nil, the id of the returned reference
             // should be the same as the argument to the function
             post {
@@ -243,7 +243,7 @@ pub contract KittyItems: NonFungibleToken {
     // Collection
     // A collection of KittyItem NFTs owned by an account
     //
-    pub resource Collection: KittyItemsCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection {
+    pub resource Collection: HouseListingsCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection {
         // dictionary of NFT conforming tokens
         // NFT is a resource type with an `UInt64` ID field
         //
@@ -269,7 +269,7 @@ pub contract KittyItems: NonFungibleToken {
         // takes a NFT and adds it to the collections dictionary
         // and adds the ID to the id array
         pub fun deposit(token: @NonFungibleToken.NFT) {
-            let token <- token as! @KittyItems.NFT
+            let token <- token as! @HouseListings.NFT
 
             let id: UInt64 = token.id
 
@@ -298,11 +298,11 @@ pub contract KittyItems: NonFungibleToken {
         // exposing all of its fields (including the typeID & rarityID).
         // This is safe as there are no functions that can be called on the KittyItem.
         //
-        pub fun borrowKittyItem(id: UInt64): &KittyItems.NFT? {
+        pub fun borrowKittyItem(id: UInt64): &HouseListings.NFT? {
             if self.ownedNFTs[id] != nil {
                 // Create an authorized reference to allow downcasting
                 let ref = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-                return ref as! &KittyItems.NFT
+                return ref as! &HouseListings.NFT
             } else {
                 return nil
             }    
@@ -310,7 +310,7 @@ pub contract KittyItems: NonFungibleToken {
 
         pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
             let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
-            let kittyItem = nft as! &KittyItems.NFT
+            let kittyItem = nft as! &HouseListings.NFT
             return kittyItem as &AnyResource{MetadataViews.Resolver}
         }
 
@@ -353,8 +353,8 @@ pub contract KittyItems: NonFungibleToken {
             // metadata["foo"] = "bar"
 
             // create a new NFT
-            var newNFT <- create KittyItems.NFT(
-                id: KittyItems.totalSupply,
+            var newNFT <- create HouseListings.NFT(
+                id: HouseListings.totalSupply,
                 royalties: royalties,
                 metadata: metadata,
                 kind: kind, 
@@ -365,19 +365,19 @@ pub contract KittyItems: NonFungibleToken {
             recipient.deposit(token: <-newNFT)
 
             emit Minted(
-                id: KittyItems.totalSupply,
+                id: HouseListings.totalSupply,
                 kind: kind.rawValue,
                 rarity: rarity.rawValue,
             )
 
-            KittyItems.totalSupply = KittyItems.totalSupply + UInt64(1)
+            HouseListings.totalSupply = HouseListings.totalSupply + UInt64(1)
         }
 
         // Update NFT images for new type
         pub fun addNewImagesForKind(from: AuthAccount, newImages: {Kind: {Rarity: String}}) {
-            let kindValue = KittyItems.images.containsKey(newImages.keys[0]) 
+            let kindValue = HouseListings.images.containsKey(newImages.keys[0]) 
             if(!kindValue) {
-                KittyItems.images.insert(key: newImages.keys[0], newImages.values[0])
+                HouseListings.images.insert(key: newImages.keys[0], newImages.values[0])
                 emit ImagesAddedForNewKind(
                     kind: newImages.keys[0].rawValue,
                 )
@@ -389,16 +389,16 @@ pub contract KittyItems: NonFungibleToken {
 
     // fetch
     // Get a reference to a KittyItem from an account's Collection, if available.
-    // If an account does not have a KittyItems.Collection, panic.
+    // If an account does not have a HouseListings.Collection, panic.
     // If it has a collection but does not contain the itemID, return nil.
     // If it has a collection and that collection contains the itemID, return a reference to that.
     //
-    pub fun fetch(_ from: Address, itemID: UInt64): &KittyItems.NFT? {
+    pub fun fetch(_ from: Address, itemID: UInt64): &HouseListings.NFT? {
         let collection = getAccount(from)
-            .getCapability(KittyItems.CollectionPublicPath)!
-            .borrow<&KittyItems.Collection{KittyItems.KittyItemsCollectionPublic}>()
+            .getCapability(HouseListings.CollectionPublicPath)!
+            .borrow<&HouseListings.Collection{HouseListings.HouseListingsCollectionPublic}>()
             ?? panic("Couldn't get collection")
-        // We trust KittyItems.Collection.borowKittyItem to get the correct itemID
+        // We trust HouseListings.Collection.borowKittyItem to get the correct itemID
         // (it checks it before returning it).
         return collection.borrowKittyItem(id: itemID)
     }
@@ -451,16 +451,16 @@ pub contract KittyItems: NonFungibleToken {
         self.totalSupply = 0
 
         // Set our named paths
-        self.CollectionStoragePath = /storage/kittyItemsCollectionV14
-        self.CollectionPublicPath = /public/kittyItemsCollectionV14
-        self.MinterStoragePath = /storage/kittyItemsMinterV14
+        self.CollectionStoragePath = /storage/HouseListingsCollectionV14
+        self.CollectionPublicPath = /public/HouseListingsCollectionV14
+        self.MinterStoragePath = /storage/HouseListingsMinterV14
 
         // Create a Collection resource and save it to storage
         let collection <- create Collection()
         self.account.save(<-collection, to: self.CollectionStoragePath)
 
         // Create a public capability for the collection
-        self.account.link<&KittyItems.Collection{NonFungibleToken.CollectionPublic, KittyItems.KittyItemsCollectionPublic, MetadataViews.ResolverCollection}>(
+        self.account.link<&HouseListings.Collection{NonFungibleToken.CollectionPublic, HouseListings.HouseListingsCollectionPublic, MetadataViews.ResolverCollection}>(
             self.CollectionPublicPath,
             target: self.CollectionStoragePath
         )

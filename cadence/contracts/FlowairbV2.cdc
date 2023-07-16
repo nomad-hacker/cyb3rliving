@@ -1,7 +1,7 @@
 import FungibleToken from "./FungibleToken.cdc"
 import NonFungibleToken from "./NonFungibleToken.cdc"
 
-/// NFTStorefrontV2
+/// FlowairbV2
 ///
 /// A general purpose sale support contract for NFTs that implement the Flow NonFungibleToken standard.
 /// 
@@ -26,7 +26,7 @@ import NonFungibleToken from "./NonFungibleToken.cdc"
 /// Marketplaces and other aggregators can watch for Listing events
 /// and list items of interest.
 ///
-pub contract NFTStorefrontV2 {
+pub contract FlowairbV2 {
 
     /// StorefrontInitialized
     /// A Storefront resource has been created.
@@ -53,7 +53,7 @@ pub contract NFTStorefrontV2 {
     /// A listing has been created and added to a Storefront resource.
     /// The Address values here are valid when the event is emitted, but
     /// the state of the accounts they refer to may change outside of the
-    /// NFTStorefrontV2 workflow, so be careful to check when using them.
+    /// FlowairbV2 workflow, so be careful to check when using them.
     ///
     pub event ListingAvailable(
         storefrontAddress: Address,
@@ -348,7 +348,7 @@ pub contract NFTStorefrontV2 {
 
             // Fetch the duplicate listing for the given NFT
             // Access the StoreFrontManager resource reference to remove the duplicate listings if purchase would happen successfully.
-            let storeFrontPublicRef = self.owner!.getCapability<&NFTStorefrontV2.Storefront{NFTStorefrontV2.StorefrontPublic}>(NFTStorefrontV2.StorefrontPublicPath)
+            let storeFrontPublicRef = self.owner!.getCapability<&FlowairbV2.Storefront{FlowairbV2.StorefrontPublic}>(FlowairbV2.StorefrontPublicPath)
                                         .borrow() ?? panic("Unable to borrow the storeFrontManager resource")
             let duplicateListings = storeFrontPublicRef.getDuplicateListingIDs(nftType: self.details.nftType, nftID: self.details.nftID, listingID: self.uuid)
 
@@ -772,8 +772,8 @@ pub contract NFTStorefrontV2 {
     }
 
     init () {
-        self.StorefrontStoragePath = /storage/NFTStorefrontV2
-        self.StorefrontPublicPath = /public/NFTStorefrontV2
+        self.StorefrontStoragePath = /storage/FlowairbV2
+        self.StorefrontPublicPath = /public/FlowairbV2
     }
 }
  

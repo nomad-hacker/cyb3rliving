@@ -59,9 +59,9 @@ const RegisterModal= () => {
     },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: 'shanni',
-      email: 'shan.liu03@gmail.com',
-      password: '12345678'
+      name: '',
+      email: '',
+      password: ''
     },
   });
 
@@ -135,7 +135,7 @@ const RegisterModal= () => {
         outline 
         label="Continue with Flow"
         icon={AiFillGithub}
-        onClick={() => signIn('flow')}
+        onClick={() => signIn('github')}
       />
       <div 
         className="

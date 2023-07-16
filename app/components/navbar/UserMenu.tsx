@@ -104,7 +104,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           "
         >
           <div className="flex flex-col cursor-pointer">
-            {user ? (
+            {currentUser ? (
               <>
                 <MenuItem 
                   label="My trips" 
@@ -136,7 +136,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
               <>
                 <MenuItem 
                   label="Login" 
-                  onClick={fcl.logIn} //{loginModal.onOpen}
+                  onClick={loginModal.onOpen} //{fcl.logIn} //
                 />
                 <MenuItem 
                   label="Sign up" 

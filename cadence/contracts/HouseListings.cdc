@@ -23,47 +23,41 @@ pub contract HouseListings: NonFungibleToken {
     pub let MinterStoragePath: StoragePath
 
     pub enum Rarity: UInt8 {
-        pub case blue
-        pub case green
-        pub case purple
-        pub case gold
+        pub case rareFound
+        pub case normal
     }
 
     pub fun rarityToString(_ rarity: Rarity): String {
         switch rarity {
-            case Rarity.blue:
-                return "Blue"
-            case Rarity.green:
-                return "Green"
-            case Rarity.purple:
-                return "Purple"
-            case Rarity.gold:
-                return "Gold"
+            case Rarity.normal:
+                return "Normal"
+            case Rarity.rareFound:
+                return "Rare Found"
         }
 
         return ""
     }
 
     pub enum Kind: UInt8 {
-        pub case fishbowl
-        pub case fishhat
-        pub case milkshake
-        pub case tuktuk
-        pub case skateboard
+        pub case beach
+        pub case modern
+        pub case lake
+        pub case skiing
+        pub case caves
     }
 
     pub fun kindToString(_ kind: Kind): String {
         switch kind {
-            case Kind.fishbowl:
-                return "Fishbowl"
-            case Kind.fishhat:
-                return "Fish Hat"
-            case Kind.milkshake:
-                return "Milkshake"
-            case Kind.tuktuk:
-                return "Tuk-Tuk"
-            case Kind.skateboard:
-                return "Skateboard"
+            case Kind.beach:
+                return "Beach House"
+            case Kind.modern:
+                return "Modern"
+            case Kind.lake:
+                return "Lake House"
+            case Kind.skiing:
+                return "Skiing"
+            case Kind.caves:
+                return "Caves"
         }
 
         return ""

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 import Button from "../Button";
@@ -31,6 +31,7 @@ const Modal: React.FC<ModalProps> = ({
   secondaryActionLabel
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
+  const backdrop = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -46,6 +47,12 @@ const Modal: React.FC<ModalProps> = ({
       onClose();
     }, 300)
   }, [onClose, disabled]);
+
+  const handleBackdropClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === backdrop.current) {
+      handleClose();
+    }
+  }, [handleClose]);
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -70,6 +77,8 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <>
       <div
+        ref={backdrop}
+        onClick={handleBackdropClick}
         className="
           justify-center 
           items-center 

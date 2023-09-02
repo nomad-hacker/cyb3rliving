@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@onflow/types": "^1.0.2",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@onflow/fcl": "^1.4.1",
+    "@onflow/types": "^1.0.2",
     "@prisma/client": "^4.11.0",
     "@types/cors": "^2.8.9",
     "@types/express": "^4.17.9",
@@ -28,6 +28,7 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "elliptic": "^6.5.4",
+    "encoding": "^0.1.13",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "express": "^4.17.1",

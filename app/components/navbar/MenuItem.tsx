@@ -18,6 +18,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
         hover:bg-neutral-100 
         transition
         font-semibold
+        whitespace-nowrap
+        min-w-[10rem]
       "
     >
       {label}

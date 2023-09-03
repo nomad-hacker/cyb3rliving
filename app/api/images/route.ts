@@ -3,10 +3,6 @@ import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { uploadToCloudinary } from "@/app/libs/cloudinary";
 
-interface IParams {
-  imageData: string;
-}
-
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 

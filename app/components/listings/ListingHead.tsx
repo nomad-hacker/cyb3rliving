@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 
@@ -11,29 +11,30 @@ import HeartButton from "../HeartButton";
 interface ListingHeadProps {
   title: string;
   locationValue: string;
-  imageSrc: string;
+  images: string[];
   id: string;
-  currentUser?: SafeUser | null
+  currentUser?: SafeUser | null;
 }
 
 const ListingHead: React.FC<ListingHeadProps> = ({
   title,
   locationValue,
-  imageSrc,
+  images,
   id,
-  currentUser
+  currentUser,
 }) => {
   const { getByValue } = useCountries();
 
   const location = getByValue(locationValue);
 
-  return ( 
+  return (
     <>
       <Heading
         title={title}
         subtitle={`${location?.region}, ${location?.label}`}
       />
-      <div className="
+      <div
+        className="
           w-full
           h-[60vh]
           overflow-hidden 
@@ -42,7 +43,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
         "
       >
         <Image
-          src={imageSrc}
+          src={images[0]}
           fill
           className="object-cover w-full"
           alt="Image"
@@ -54,14 +55,11 @@ const ListingHead: React.FC<ListingHeadProps> = ({
             right-5
           "
         >
-          <HeartButton 
-            listingId={id}
-            currentUser={currentUser}
-          />
+          <HeartButton listingId={id} currentUser={currentUser} />
         </div>
       </div>
     </>
-   );
-}
- 
+  );
+};
+
 export default ListingHead;

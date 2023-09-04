@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { PreviewImageWithUrl } from "@/app/types";
+import { uploadImage } from "@/app/services/uploadImage";
 
 interface Props {
   value: PreviewImageWithUrl[];
@@ -19,18 +20,10 @@ export const useUploadImage = ({ value: images, onChange }: Props) => {
 
   const [isUploading, setIsUploading] = useState(false);
 
-  const uploadImage = async (imageData: string) => {
-    const axiosResponse = await axios.post("/api/images", {
-      imageData,
-    });
-    return axiosResponse.data.url as string;
-  };
-
   const onImageFileChange = async (
     imageList: ImageListType,
     addUpdateIndex: number[] | undefined
   ) => {
-    console.log(imageList);
     setPreviewImages(imageList);
 
     // delete image

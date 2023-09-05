@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
 
-import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
 
 import Avatar from "../Avatar";
@@ -38,9 +37,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   category,
   locationValue,
 }) => {
-  const { getByValue } = useCountries();
-
-  const coordinates = getByValue(locationValue)?.latlng;
+  const { coordinates } = JSON.parse(locationValue);
 
   return (
     <div className="col-span-4 flex flex-col gap-8">
@@ -89,7 +86,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         {description}
       </div>
       <hr />
-      <Map center={coordinates} />
+      <Map coordinates={coordinates} isZoomed={true} />
     </div>
   );
 };

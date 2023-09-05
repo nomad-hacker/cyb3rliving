@@ -132,7 +132,7 @@ const SearchModal = () => {
         onCountryChange={(value) => setLocation(value)}
       />
       <hr />
-      <Map center={[0, 0]} />
+      <Map coordinates={[0, 0]} />
     </div>
   );
 

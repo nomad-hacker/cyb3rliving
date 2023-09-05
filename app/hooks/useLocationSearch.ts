@@ -15,7 +15,11 @@ type Props = {
   setSearchString: (searchString: string) => void;
 };
 
-export const useMap = ({ onChange, searchString, setSearchString }: Props) => {
+export const useLocationSearch = ({
+  onChange,
+  searchString,
+  setSearchString,
+}: Props) => {
   const [immediateValue, setImmediateValue] = useState(searchString || "");
   const debouncedValue = useDebounce(immediateValue, 500);
   const [predictions, setPredictions] = useState<Place[]>([]);

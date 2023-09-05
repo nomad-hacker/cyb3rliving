@@ -98,6 +98,7 @@ const RentModal = () => {
       ...data,
       images: data.images.map((image: PreviewImageWithUrl) => image.url),
     };
+    console.log(finalData);
 
     axios
       .post("/api/listings", finalData)
@@ -171,7 +172,7 @@ const RentModal = () => {
         />
         <CountrySelect
           value={location}
-          onChange={(value) => setCustomValue("location", value)}
+          onCountryChange={(value) => setCustomValue("location", value)}
         />
         <Map center={location?.latlng} />
       </div>

@@ -28,7 +28,7 @@ const SearchModal = () => {
 
   const [step, setStep] = useState(STEPS.LOCATION);
 
-  const [location, setLocation] = useState<CountrySelectValue>();
+  const [location, setLocation] = useState<string>();
   const [guestCount, setGuestCount] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
   const [bathroomCount, setBathroomCount] = useState(1);
@@ -67,7 +67,7 @@ const SearchModal = () => {
 
     const updatedQuery: any = {
       ...currentQuery,
-      locationValue: location?.value,
+      locationValue: location,
       guestCount,
       roomCount,
       bathroomCount,
@@ -129,10 +129,10 @@ const SearchModal = () => {
       />
       <CountrySelect
         value={location}
-        onChange={(value) => setLocation(value as CountrySelectValue)}
+        onCountryChange={(value) => setLocation(value)}
       />
       <hr />
-      <Map center={location?.latlng} />
+      <Map center={[0, 0]} />
     </div>
   );
 

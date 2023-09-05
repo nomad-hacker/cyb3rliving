@@ -81,7 +81,7 @@ const Modal: React.FC<ModalProps> = ({
     <>
       <div
         ref={backdrop}
-        onClick={handleBackdropClick}
+        onMouseDown={handleBackdropClick}
         className="
           justify-center 
           items-center 

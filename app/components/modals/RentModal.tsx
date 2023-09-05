@@ -103,7 +103,6 @@ const RentModal = () => {
       ...data,
       images: data.images.map((image: PreviewImageWithUrl) => image.url),
     };
-    console.log(finalData);
 
     axios
       .post("/api/listings", finalData)

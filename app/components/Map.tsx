@@ -8,11 +8,8 @@ import "leaflet/dist/leaflet.css";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import { useDebounce } from "../hooks/useDebounce";
-import { useEffect, useState } from "react";
-import { getPlaceAutocomplete } from "../services/getPlaceAutocomplete";
-import { getPlaceDetails } from "../services/getPlaceDetails";
-import { set } from "date-fns";
+import { useMap } from "../hooks/useMap";
+import { PlaceDetails } from "../types";
 
 // @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
@@ -33,67 +30,17 @@ interface Props {
   setSearchString: (value: string) => void;
 }
 
-type Place = {
-  name: string;
-  id: string;
-};
-
-type PlaceDetails = {
-  address: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-};
-
 const Map = ({ value, onChange, searchString, setSearchString }: Props) => {
-  const [immediateValue, setImmediateValue] = useState(searchString || "");
-  const debouncedValue = useDebounce(immediateValue, 500);
-  const [predictions, setPredictions] = useState<Place[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [shouldShowPlaces, setShouldShowPlaces] = useState(false);
-
-  useEffect(() => {
-    if (!debouncedValue) {
-      setPredictions([]);
-      setShouldShowPlaces(false);
-      return;
-    }
-
-    setIsLoading(true);
-    getPlaceAutocomplete(debouncedValue).then((predictions) => {
-      setPredictions(predictions);
-      setIsLoading(false);
-    });
-  }, [debouncedValue]);
-
-  const selectLocation = async (place: Place) => {
-    setImmediateValue(place.name);
-    const placeDetails = await getPlaceDetails(place.id);
-    onChange(placeDetails);
-    setSearchString(place.name);
-    setShouldShowPlaces(false);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Escape") {
-      setShouldShowPlaces(false);
-    } else {
-      setShouldShowPlaces(true);
-    }
-  };
-
-  const handleClearSearch = () => {
-    setImmediateValue("");
-    onChange({
-      address: "",
-      coordinates: {
-        lat: 51,
-        lng: -0.09,
-      },
-    });
-    setSearchString("");
-  };
+  const {
+    immediateValue,
+    setImmediateValue,
+    handleKeyDown,
+    handleClearSearch,
+    shouldShowPlaces,
+    isLoading,
+    predictions,
+    selectLocation,
+  } = useMap({ onChange, searchString, setSearchString });
 
   const coordinates = Object.values(value.coordinates) as LatLngExpression;
 

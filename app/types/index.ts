@@ -28,6 +28,14 @@ export type PreviewImageWithUrl = {
   url: Promise<string> | string;
 } & ImageType;
 
+export type PlaceDetails = {
+  address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+};
+
 export type Address = {
   addressLine1: string;
   addressLine2: string;

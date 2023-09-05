@@ -3,6 +3,7 @@
 import Select from "react-select";
 
 import useCountries from "@/app/hooks/useCountries";
+import { useState } from "react";
 
 export type CountrySelectValue = {
   flag: string;
@@ -13,12 +14,23 @@ export type CountrySelectValue = {
 };
 
 interface CountrySelectProps {
-  value?: CountrySelectValue;
-  onChange: (value: CountrySelectValue) => void;
+  value?: string;
+  onCountryChange: (value: string) => void;
 }
 
-const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
-  const { getAll } = useCountries();
+const CountrySelect: React.FC<CountrySelectProps> = ({
+  value,
+  onCountryChange,
+}) => {
+  const { getAll, getByLabel } = useCountries();
+  const [country, setCountry] = useState<CountrySelectValue | undefined>(
+    value ? getByLabel(value) : undefined
+  );
+
+  const onSelectedCountryChange = (value: CountrySelectValue) => {
+    setCountry(value);
+    onCountryChange(value.label);
+  };
 
   return (
     <div>
@@ -26,8 +38,10 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
         placeholder="Anywhere"
         isClearable
         options={getAll()}
-        value={value}
-        onChange={(value) => onChange(value as CountrySelectValue)}
+        value={country}
+        onChange={(value) =>
+          onSelectedCountryChange(value as CountrySelectValue)
+        }
         formatOptionLabel={(option: any) => (
           <div
             className="

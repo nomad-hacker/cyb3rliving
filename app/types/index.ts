@@ -27,3 +27,26 @@ export type SafeUser = Omit<
 export type PreviewImageWithUrl = {
   url: Promise<string> | string;
 } & ImageType;
+
+export type PlaceDetails = {
+  address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+};
+
+export type Address = {
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
+};
+
+type Setters<T> = {
+  [Key in keyof T as `set${Capitalize<string & Key>}`]: (value: T[Key]) => void;
+};
+
+export type AddressActions = Setters<Address>;

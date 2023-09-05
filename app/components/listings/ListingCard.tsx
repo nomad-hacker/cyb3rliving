@@ -32,9 +32,17 @@ const ListingCard: React.FC<ListingCardProps> = ({
   currentUser,
 }) => {
   const router = useRouter();
-  const { getByValue } = useCountries();
 
-  const location = getByValue(data.locationValue);
+  const parsedLocation = useMemo(() => {
+    const { address, coordinates } = JSON.parse(data.locationValue);
+
+    const [street, city] = address.split(",");
+    return {
+      coordinates,
+      street,
+      city,
+    };
+  }, [data.locationValue]);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -105,8 +113,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
+        <div>
+          <p className="font-semibold text-lg">{data.title}</p>
+          <p className="font-light">
+            {parsedLocation.street}, {parsedLocation.city}
+          </p>
         </div>
         <div className="font-light text-neutral-500">
           {reservationDate || data.category}

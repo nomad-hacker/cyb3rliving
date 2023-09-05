@@ -14,6 +14,7 @@ import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
 import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
 import Heading from "../Heading";
+import { DEFAULT_COORDINATES } from "@/app/utils/constants";
 
 enum STEPS {
   LOCATION = 0,
@@ -28,7 +29,7 @@ const SearchModal = () => {
 
   const [step, setStep] = useState(STEPS.LOCATION);
 
-  const [location, setLocation] = useState<CountrySelectValue>();
+  const [location, setLocation] = useState<string>();
   const [guestCount, setGuestCount] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
   const [bathroomCount, setBathroomCount] = useState(1);
@@ -67,7 +68,7 @@ const SearchModal = () => {
 
     const updatedQuery: any = {
       ...currentQuery,
-      locationValue: location?.value,
+      locationValue: location,
       guestCount,
       roomCount,
       bathroomCount,
@@ -129,10 +130,10 @@ const SearchModal = () => {
       />
       <CountrySelect
         value={location}
-        onChange={(value) => setLocation(value as CountrySelectValue)}
+        onCountryChange={(value) => setLocation(value)}
       />
       <hr />
-      <Map center={location?.latlng} />
+      <Map coordinates={DEFAULT_COORDINATES} />
     </div>
   );
 

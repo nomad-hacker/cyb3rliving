@@ -3,7 +3,6 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
@@ -12,12 +11,13 @@ import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
 import Counter from "../inputs/Counter";
 import CategoryInput from "../inputs/CategoryInput";
-import CountrySelect from "../inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
 import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 import { PreviewImageWithUrl } from "@/app/types";
+import LocationSearch from "../inputs/LocationSearch";
+import { DEFAULT_COORDINATES } from "@/app/utils/constants";
 
 enum STEPS {
   CATEGORY = 0,
@@ -45,7 +45,10 @@ const RentModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: "",
-      location: null,
+      location: {
+        address: "",
+        coordinates: DEFAULT_COORDINATES,
+      },
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
@@ -62,14 +65,6 @@ const RentModal = () => {
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
   const images = watch("images");
-
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    [location]
-  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -162,6 +157,8 @@ const RentModal = () => {
     </div>
   );
 
+  const [searchString, setSearchString] = useState("");
+
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -169,11 +166,14 @@ const RentModal = () => {
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
-        <CountrySelect
-          value={location}
-          onChange={(value) => setCustomValue("location", value)}
-        />
-        <Map center={location?.latlng} />
+        <div style={{ height: "calc(35vh + 44px)" }}>
+          <LocationSearch
+            value={location}
+            onChange={(value) => setCustomValue("location", value)}
+            searchString={searchString}
+            setSearchString={setSearchString}
+          />
+        </div>
       </div>
     );
   }

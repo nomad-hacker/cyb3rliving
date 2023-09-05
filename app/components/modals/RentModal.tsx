@@ -17,6 +17,7 @@ import Input from "../inputs/Input";
 import Heading from "../Heading";
 import { PreviewImageWithUrl } from "@/app/types";
 import LocationSearch from "../inputs/LocationSearch";
+import { DEFAULT_COORDINATES } from "@/app/utils/constants";
 
 enum STEPS {
   CATEGORY = 0,
@@ -46,10 +47,7 @@ const RentModal = () => {
       category: "",
       location: {
         address: "",
-        coordinates: {
-          lat: 51,
-          lng: -0.09,
-        },
+        coordinates: DEFAULT_COORDINATES,
       },
       guestCount: 1,
       roomCount: 1,

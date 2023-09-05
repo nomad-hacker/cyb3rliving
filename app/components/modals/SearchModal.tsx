@@ -14,6 +14,7 @@ import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
 import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
 import Heading from "../Heading";
+import { DEFAULT_COORDINATES } from "@/app/utils/constants";
 
 enum STEPS {
   LOCATION = 0,
@@ -132,7 +133,7 @@ const SearchModal = () => {
         onCountryChange={(value) => setLocation(value)}
       />
       <hr />
-      <Map coordinates={[0, 0]} />
+      <Map coordinates={DEFAULT_COORDINATES} />
     </div>
   );
 

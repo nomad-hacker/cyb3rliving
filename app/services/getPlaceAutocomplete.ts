@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getPlaceAutocomplete = async (search: string) => {
   const axiosResponse = await axios.get(
-    "/api/placeAutocomplete?input=" + search
+    "/api/place/autocomplete?input=" + search
   );
 
   if (axiosResponse.status !== 200) {

@@ -3,6 +3,7 @@ import { useDebounce } from "./useDebounce";
 import { getPlaceAutocomplete } from "../services/getPlaceAutocomplete";
 import { getPlaceDetails } from "../services/getPlaceDetails";
 import { PlaceDetails } from "../types";
+import { DEFAULT_COORDINATES } from "../utils/constants";
 
 type Place = {
   name: string;
@@ -61,10 +62,7 @@ export const useLocationSearch = ({
     setImmediateValue("");
     onChange({
       address: "",
-      coordinates: {
-        lat: 51,
-        lng: -0.09,
-      },
+      coordinates: DEFAULT_COORDINATES,
     });
     setSearchString("");
   };

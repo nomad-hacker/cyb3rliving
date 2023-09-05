@@ -78,13 +78,13 @@ const LocationSearch = ({
             {predictions.length > 0 &&
               !isLoading &&
               predictions.map((prediction) => (
-                <div
+                <button
                   key={prediction.id}
-                  className="p-2 border-b border-slate-100 cursor-pointer hover:bg-slate-100"
+                  className="p-2 w-full text-left border-b border-slate-100 cursor-pointer hover:bg-slate-100"
                   onClick={() => selectLocation(prediction)}
                 >
                   {prediction.name}
-                </div>
+                </button>
               ))}
           </div>
         )}

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getPlaceDetails = async (placeId: string) => {
   const axiosResponse = await axios.get(
-    "/api/placeDetails?place_id=" + placeId
+    "/api/place/details?place_id=" + placeId
   );
 
   if (axiosResponse.status !== 200) {

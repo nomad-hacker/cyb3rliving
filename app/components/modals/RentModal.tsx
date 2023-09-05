@@ -12,7 +12,6 @@ import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
 import Counter from "../inputs/Counter";
 import CategoryInput from "../inputs/CategoryInput";
-import CountrySelect from "../inputs/CountrySelect";
 import { categories } from "../navbar/Categories";
 import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
@@ -45,7 +44,13 @@ const RentModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: "",
-      location: null,
+      location: {
+        address: "",
+        coordinates: {
+          lat: 51,
+          lng: -0.09,
+        },
+      },
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
@@ -163,6 +168,8 @@ const RentModal = () => {
     </div>
   );
 
+  const [searchString, setSearchString] = useState("");
+
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -170,11 +177,14 @@ const RentModal = () => {
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
-        <CountrySelect
-          value={location}
-          onCountryChange={(value) => setCustomValue("location", value)}
-        />
-        <Map center={location?.latlng} />
+        <div style={{ height: "calc(35vh + 44px)" }}>
+          <Map
+            value={location}
+            onChange={(value) => setCustomValue("location", value)}
+            searchString={searchString}
+            setSearchString={setSearchString}
+          />
+        </div>
       </div>
     );
   }

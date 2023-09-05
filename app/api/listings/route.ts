@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
-// import { HouseListingsService } from "@/app/flow/services/propertyListing";
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
@@ -39,7 +38,7 @@ export async function POST(request: Request) {
       roomCount,
       bathroomCount,
       guestCount,
-      locationValue: location,
+      locationValue: JSON.stringify(location),
       price: parseInt(price, 10),
       user: {
         connect: {

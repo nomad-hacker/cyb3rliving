@@ -53,7 +53,9 @@ export default async function getListings(params: IListingsParams) {
     }
 
     if (locationValue) {
-      query.locationValue = locationValue;
+      query.locationValue = {
+        contains: JSON.parse(locationValue).address.split(",")[0],
+      };
     }
 
     if (startDate && endDate) {

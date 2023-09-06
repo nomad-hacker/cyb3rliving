@@ -1,7 +1,6 @@
 "use client";
 
 import qs from "query-string";
-import dynamic from "next/dynamic";
 import { useCallback, useMemo, useState } from "react";
 import { Range } from "react-date-range";
 import { formatISO } from "date-fns";
@@ -12,9 +11,10 @@ import useSearchModal from "@/app/hooks/useSearchModal";
 import Modal from "./Modal";
 import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
-import CountrySelect, { CountrySelectValue } from "../inputs/CountrySelect";
 import Heading from "../Heading";
 import { DEFAULT_COORDINATES } from "@/app/utils/constants";
+import LocationSearch from "../inputs/LocationSearch";
+import { PlaceDetails } from "@/app/types";
 
 enum STEPS {
   LOCATION = 0,
@@ -29,7 +29,10 @@ const SearchModal = () => {
 
   const [step, setStep] = useState(STEPS.LOCATION);
 
-  const [location, setLocation] = useState<string>();
+  const [location, setLocation] = useState<PlaceDetails>({
+    address: "",
+    coordinates: DEFAULT_COORDINATES,
+  });
   const [guestCount, setGuestCount] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
   const [bathroomCount, setBathroomCount] = useState(1);
@@ -38,14 +41,6 @@ const SearchModal = () => {
     endDate: new Date(),
     key: "selection",
   });
-
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    [location]
-  );
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
@@ -68,7 +63,7 @@ const SearchModal = () => {
 
     const updatedQuery: any = {
       ...currentQuery,
-      locationValue: location,
+      locationValue: JSON.stringify(location),
       guestCount,
       roomCount,
       bathroomCount,
@@ -122,20 +117,24 @@ const SearchModal = () => {
     return "Back";
   }, [step]);
 
+  const [searchString, setSearchString] = useState("");
+
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
         title="Where do you wanna go?"
         subtitle="Find the perfect location!"
       />
-      <CountrySelect
-        value={location}
-        onCountryChange={(value) => setLocation(value)}
-      />
       <hr />
-      <Map coordinates={DEFAULT_COORDINATES} />
+      <LocationSearch
+        value={location}
+        onChange={(value) => setLocation(value)}
+        searchString={searchString}
+        setSearchString={setSearchString}
+      />
     </div>
   );
+  console.log(location);
 
   if (step === STEPS.DATE) {
     bodyContent = (

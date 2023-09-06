@@ -134,7 +134,6 @@ const SearchModal = () => {
       />
     </div>
   );
-  console.log(location);
 
   if (step === STEPS.DATE) {
     bodyContent = (

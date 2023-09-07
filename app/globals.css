@@ -5,7 +5,6 @@
 @layer base {
   :root {
     /* For hsl(198deg 93% 60% / <alpha-value>) */
-    --test: #6e8bf7;
     --primary-muted: 240 30% 89%;
     --primary-light: 227 100% 92%;
     --primary: 227 90% 70%;

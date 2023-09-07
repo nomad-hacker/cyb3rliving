@@ -55,6 +55,7 @@
     "react-icons": "^4.8.0",
     "react-images-uploading": "^3.1.7",
     "react-leaflet": "^4.2.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-select": "^5.7.2",
     "react-spinners": "^0.13.8",
     "sha3": "^2.1.3",

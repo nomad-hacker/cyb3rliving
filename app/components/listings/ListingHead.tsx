@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { Carousel } from "react-responsive-carousel";
 
-import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import Heading from "../Heading";
 import HeartButton from "../HeartButton";
+import { parseLocation } from "@/app/utils/scripts/parseLocation";
 
 interface ListingHeadProps {
   title: string;
@@ -23,39 +25,65 @@ const ListingHead: React.FC<ListingHeadProps> = ({
   id,
   currentUser,
 }) => {
-  const { getByValue } = useCountries();
-
-  const location = getByValue(locationValue);
+  const parsedLocation = parseLocation(locationValue);
+  const thumbnails = images.map((image) =>
+    image.replace("upload", "upload/c_fill,w_160,h_90")
+  );
 
   return (
     <>
       <Heading
         title={title}
-        subtitle={`${location?.region}, ${location?.label}`}
+        subtitle={`${parsedLocation.street}, ${parsedLocation.city}`}
       />
       <div
         className="
           w-full
-          h-[60vh]
-          overflow-hidden 
           rounded-xl
           relative
         "
       >
-        <Image
-          src={images[0]}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
+        {images.length === 1 && (
+          <Image
+            src={images[0]}
+            width={1200}
+            height={570}
+            className="aspect-video object-cover"
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            alt="Photo of the property"
+          />
+        )}
+        {images.length > 1 && (
+          <Carousel
+            renderThumbs={() => {
+              return thumbnails.map((thumbnail) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img key={thumbnail} src={thumbnail} alt="" />
+              ));
+            }}
+          >
+            {images.map((image) => (
+              <div key={image}>
+                <Image
+                  src={image}
+                  width={1200}
+                  height={570}
+                  className="aspect-video object-cover"
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  alt="Photo of the property"
+                />
+              </div>
+            ))}
+          </Carousel>
+        )}
         <div
           className="
             absolute
             top-5
-            right-5
+            right-6
           "
         >
-          <HeartButton listingId={id} currentUser={currentUser} />
+          <HeartButton size="large" listingId={id} currentUser={currentUser} />
         </div>
       </div>
     </>

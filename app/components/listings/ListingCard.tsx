@@ -11,6 +11,7 @@ import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
 import ClientOnly from "../ClientOnly";
+import { parseLocation } from "@/app/utils/scripts/parseLocation";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -33,16 +34,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   const router = useRouter();
 
-  const parsedLocation = useMemo(() => {
-    const { address, coordinates } = JSON.parse(data.locationValue);
-
-    const [street, city] = address.split(",");
-    return {
-      coordinates,
-      street,
-      city,
-    };
-  }, [data.locationValue]);
+  const parsedLocation = parseLocation(data.locationValue);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {

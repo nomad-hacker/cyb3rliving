@@ -23,3 +23,47 @@ body,
   font-size: 16px !important;
   width: 100% !important;
 }
+
+.carousel .slider-wrapper .slide img {
+  border-radius: 4px;
+}
+
+.carousel .thumb.selected {
+  border: 2px solid #f43f5e !important;
+  border-radius: 3px;
+}
+
+.carousel .thumb:hover {
+  border: 2px solid #f43f5e90 !important;
+  border-radius: 3px;
+}
+
+.carousel .thumb img {
+  border-radius: 2px;
+}
+
+.carousel-heart-outline-large {
+  --size: 24px;
+  --size: clamp(1.7rem, 5vw, 2.5rem);
+  height: var(--size);
+  width: var(--size);
+}
+
+.carousel-heart-filled-large {
+  --size: 24px;
+  --size: clamp(1.7rem, 5vw, 2.5rem);
+  height: var(--size);
+  width: var(--size);
+}
+
+.carousel-heart-outline-small {
+  --size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.carousel-heart-filled-small {
+  --size: 24px;
+  height: var(--size);
+  width: var(--size);
+}

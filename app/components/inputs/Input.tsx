@@ -51,7 +51,7 @@ const Input: React.FC<InputProps> = ({
           font-light 
           bg-white 
           border-2
-          rounded-md
+          
           outline-none
           transition
           disabled:opacity-70

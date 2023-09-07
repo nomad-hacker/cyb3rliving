@@ -26,7 +26,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       <Heading center title={title} subtitle={subtitle} />
       <div className="w-48 mt-4">
         {showReset && (
-          <RemoveFiltersButton className="w-full py-3 bg-white border-2 border-black font-semibold text-black rounded-lg hover:opacity-80 transition" />
+          <RemoveFiltersButton className="w-full py-3 bg-white border-2 border-black font-semibold text-black  hover:opacity-80 transition" />
         )}
       </div>
     </div>

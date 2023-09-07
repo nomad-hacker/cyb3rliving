@@ -127,7 +127,7 @@ const Modal: React.FC<ModalProps> = ({
               lg:h-auto
               md:h-auto
               border-0 
-              rounded-lg 
+               
               shadow-lg 
               relative 
               flex 
@@ -144,7 +144,7 @@ const Modal: React.FC<ModalProps> = ({
                 flex 
                 items-center 
                 p-6
-                rounded-t
+                
                 justify-center
                 relative
                 border-b-[1px]

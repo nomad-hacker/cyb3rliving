@@ -39,7 +39,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
       <div
         className="
           w-full
-          rounded-xl
+          
           relative
         "
       >

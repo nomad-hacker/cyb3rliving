@@ -2,12 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* For hsl(198deg 93% 60% / <alpha-value>) */
+    --test: #6e8bf7;
+    --primary-muted: 240 30% 89%;
+    --primary-light: 227 100% 92%;
+    --primary: 227 90% 70%;
+    --primary-dark: 227 90% 55%;
+
+    --text-disabled: 0 0% 40%;
+  }
+}
+
 html,
 body,
 :root {
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: hsl(var(--primary-light));
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 .leaflet-bottom,
 .leaflet-control,
 .leaflet-pane,
@@ -25,46 +52,46 @@ body,
   background-color: hsl(var(--primary-light)) !important;
 }
 
+.rdrWeekDay {
+  color: rgb(34, 34, 34) !important;
+}
+
 .rdrDayDisabled {
   background-color: hsl(var(--primary-muted)) !important;
 }
 
+.rdrDayDisabled .rdrDayNumber span {
+  color: hsl(var(--text-disabled)) !important;
+}
+
+.rdrEndEdge {
+  border-top-right-radius: 2px !important;
+  border-bottom-right-radius: 2px !important;
+}
+
+.rdrStartEdge {
+  border-top-left-radius: 2px !important;
+  border-bottom-left-radius: 2px !important;
+}
+
+.rdrNextPrevButton {
+  background-color: transparent !important;
+}
 /* html {
   @apply text-gray-700;
 } */
 
-@layer base {
-  :root {
-    /* For rgb(255 115 179 / <alpha-value>) */
-    /* --gray: 99, 99, 99; */
-
-    /* For hsl(198deg 93% 60% / <alpha-value>) */
-    /* /* --primary-highlight: 239, 100%, 61%; */
-    --primary-muted: 239, 35%, 68%;
-    --primary-light: 227, 100%, 92%; 
-
-    /* For rgba(255, 115, 179, <alpha-value>) */
-    /* --gray: 255, 115, 179; */
-  }
-}
-
 /* Styling slides show for listings */
-.carousel .slider-wrapper .slide img {
-  border-radius: 4px;
+.carousel .thumb {
+  border: 2px solid transparent !important;
 }
 
 .carousel .thumb.selected {
-  border: 2px solid #f43f5e !important;
-  border-radius: 3px;
+  border: 2px solid hsl(var(--primary-dark)) !important;
 }
 
 .carousel .thumb:hover {
-  border: 2px solid #f43f5e90 !important;
-  border-radius: 3px;
-}
-
-.carousel .thumb img {
-  border-radius: 2px;
+  border: 2px solid hsl(var(--primary-dark) / 0.5) !important;
 }
 
 .carousel-heart-outline-large {

@@ -77,14 +77,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser, user }) => {
             md:py-1
             md:px-2
             border-[1px] 
-            border-neutral-200 
             flex 
             flex-row 
             items-center 
             gap-3 
-             
             cursor-pointer 
-            hover:shadow-md 
+            hover:shadow-thin
             transition
             "
           >
@@ -97,8 +95,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser, user }) => {
             <div
               className="
               absolute 
-               
-              shadow-md
+              border-[1px]
               bg-primary-light 
               overflow-hidden 
               right-0 

@@ -57,7 +57,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
               border-dashed 
               border-2 
               p-10 
-              border-neutral-300
+              border-primary
               flex
               flex-col
               justify-center

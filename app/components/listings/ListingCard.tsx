@@ -79,8 +79,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             aspect-square 
             w-full 
             relative 
-            overflow-hidden 
-            rounded-md
+            overflow-hidden
           "
         >
           <Image

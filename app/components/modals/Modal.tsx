@@ -126,9 +126,7 @@ const Modal: React.FC<ModalProps> = ({
               h-full
               lg:h-auto
               md:h-auto
-              border-0 
-               
-              shadow-lg 
+              border-[1px]
               relative 
               flex 
               flex-col 

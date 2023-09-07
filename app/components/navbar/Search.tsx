@@ -58,9 +58,7 @@ const Search = () => {
         w-full 
         md:w-auto 
         py-2 
-         
-        shadow-sm 
-        hover:shadow-md 
+        hover:shadow-thin
         transition 
         cursor-pointer
       "
@@ -112,8 +110,7 @@ const Search = () => {
           <div
             className="
               p-2 
-              bg-rose-500 
-               
+              bg-primary
               text-white
             "
           >

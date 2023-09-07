@@ -18,6 +18,7 @@ module.exports = {
         },
         secondary: "#5757f7",
         neutral: "#b2b2eb",
+        // rose: "hsla(330, 100%, 50%, 1)"
       },
     },
   },

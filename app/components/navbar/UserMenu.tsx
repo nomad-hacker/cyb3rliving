@@ -99,7 +99,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser, user }) => {
               absolute 
                
               shadow-md
-              bg-white 
+              bg-primary-light 
               overflow-hidden 
               right-0 
               top-12 

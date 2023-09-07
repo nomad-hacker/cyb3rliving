@@ -25,9 +25,9 @@ body,
   background-color: hsl(var(--primary-light)) !important;
 }
 
-/* .rdrDayDisabled {
+.rdrDayDisabled {
   background-color: hsl(var(--primary-muted)) !important;
-} */
+}
 
 /* html {
   @apply text-gray-700;
@@ -36,15 +36,15 @@ body,
 @layer base {
   :root {
     /* For rgb(255 115 179 / <alpha-value>) */
-    --gray: 99, 99, 99;
+    /* --gray: 99, 99, 99; */
 
     /* For hsl(198deg 93% 60% / <alpha-value>) */
-    --primary-highlight: 239, 100%, 61%;
+    /* /* --primary-highlight: 239, 100%, 61%; */
     --primary-muted: 239, 35%, 68%;
-    --primary-light: 227, 100%, 92%;
+    --primary-light: 227, 100%, 92%; 
 
     /* For rgba(255, 115, 179, <alpha-value>) */
-    --gray: 255, 115, 179;
+    /* --gray: 255, 115, 179; */
   }
 }
 

@@ -31,7 +31,7 @@ const Map = ({ coordinates, isZoomed = true }: Props) => {
       center={coordinates}
       zoom={isZoomed ? 12 : 2}
       scrollWheelZoom={false}
-      className="h-[35vh] "
+      className="h-[35vh] rounded-md"
     >
       <TileLayer url={url} attribution={attribution} />
       <Marker position={coordinates} />

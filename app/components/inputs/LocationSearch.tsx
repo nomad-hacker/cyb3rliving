@@ -44,7 +44,7 @@ const LocationSearch = ({
 
   return (
     <div>
-      <div className="relative">
+      <div className="relativ1e">
         <div className="relative">
           <input
             className="w-full border-2  border-slate-200 pl-2 py-1 pr-8 mb-2"
@@ -70,7 +70,7 @@ const LocationSearch = ({
           </button>
         </div>
         {shouldShowPlaces && (
-          <div className="absolute top-[100%]  z-10 bg-white left-2 right-2">
+          <div className="absolute top-[100%]  z-10 bg-primary-light left-2 right-2">
             {isLoading && <div className="p-2">Loading...</div>}
             {predictions.length === 0 && !isLoading && (
               <div className="p-2">No results found</div>

@@ -80,6 +80,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             w-full 
             relative 
             overflow-hidden
+            rounded-md
           "
         >
           <Image

@@ -6,7 +6,7 @@
   :root {
     /* For hsl(198deg 93% 60% / <alpha-value>) */
     --primary-muted: 240 30% 89%;
-    --primary-light: 227 100% 92%;
+    --primary-light: 38 70% 80%;/*227 100% 92%; */
     --primary: 227 90% 70%;
     --primary-dark: 227 90% 55%;
 

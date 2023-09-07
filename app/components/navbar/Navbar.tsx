@@ -18,6 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, user }) => {
         className="
           py-4 
           border-b-[1px]
+          bg-primary
         "
       >
         <Container>

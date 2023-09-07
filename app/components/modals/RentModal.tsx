@@ -166,14 +166,12 @@ const RentModal = () => {
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
-        <div style={{ height: "calc(35vh + 44px)" }}>
-          <LocationSearch
-            value={location}
-            onChange={(value) => setCustomValue("location", value)}
-            searchString={searchString}
-            setSearchString={setSearchString}
-          />
-        </div>
+        <LocationSearch
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+          searchString={searchString}
+          setSearchString={setSearchString}
+        />
       </div>
     );
   }

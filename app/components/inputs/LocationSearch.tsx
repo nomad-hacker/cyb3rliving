@@ -89,7 +89,9 @@ const LocationSearch = ({
           </div>
         )}
       </div>
-      <Map coordinates={coordinates} isZoomed={!!value.address} />
+      <div className="h-[35vh]">
+        <Map coordinates={coordinates} isZoomed={!!value.address} />
+      </div>
     </div>
   );
 };

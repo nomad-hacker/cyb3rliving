@@ -28,7 +28,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <ClientOnly>
       <Container>
-        <div className="pt-24">
+        <div className="pt-24 ">
           <RemoveFiltersButton className="text-gray-600 mb-2" />
           <div
             className="

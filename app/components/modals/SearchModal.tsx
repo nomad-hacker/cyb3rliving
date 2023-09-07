@@ -125,7 +125,6 @@ const SearchModal = () => {
         title="Where do you wanna go?"
         subtitle="Find the perfect location!"
       />
-      <hr />
       <LocationSearch
         value={location}
         onChange={(value) => setLocation(value)}

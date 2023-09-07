@@ -49,9 +49,8 @@ const Input: React.FC<InputProps> = ({
           p-4
           pt-6 
           font-light 
-          bg-white 
-          border-2
-          rounded-md
+          bg-primary-light 
+          border-[1px]
           outline-none
           transition
           disabled:opacity-70
@@ -76,7 +75,8 @@ const Input: React.FC<InputProps> = ({
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
-          ${errors[id] ? "text-rose-500" : "text-zinc-400"}
+          peer-focus:text-black
+          ${errors[id] ? "text-rose-500" : "text-zinc-600"}
         `}
       >
         {label}

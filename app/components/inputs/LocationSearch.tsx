@@ -44,10 +44,10 @@ const LocationSearch = ({
 
   return (
     <div>
-      <div className="relative">
+      <div className="relativ1e">
         <div className="relative">
           <input
-            className="w-full border-2 rounded-md border-slate-200 pl-2 py-1 pr-8 mb-2"
+            className="w-full outline-black outline-offset-4 bg-transparent border-b-2 pl-2 py-1 pr-8 mb-2"
             type="text"
             placeholder="Search location"
             value={immediateValue}
@@ -58,8 +58,7 @@ const LocationSearch = ({
             className="
               p-2
               border-0 
-              opacity-50
-              hover:opacity-60
+              hover:opacity-80
               transition
               absolute
               right-[1px]
@@ -70,7 +69,7 @@ const LocationSearch = ({
           </button>
         </div>
         {shouldShowPlaces && (
-          <div className="absolute top-[100%] rounded-md z-10 bg-white left-2 right-2">
+          <div className="absolute border-[1px] border-t-0 z-10 bg-primary-light left-6 right-6">
             {isLoading && <div className="p-2">Loading...</div>}
             {predictions.length === 0 && !isLoading && (
               <div className="p-2">No results found</div>
@@ -80,7 +79,7 @@ const LocationSearch = ({
               predictions.map((prediction) => (
                 <button
                   key={prediction.id}
-                  className="p-2 w-full text-left border-b border-slate-100 cursor-pointer hover:bg-slate-100"
+                  className="p-2 w-full text-left border-b border-slate-100 cursor-pointer hover:brightness-50"
                   onClick={() => selectLocation(prediction)}
                 >
                   {prediction.name}
@@ -89,7 +88,7 @@ const LocationSearch = ({
           </div>
         )}
       </div>
-      <div className="h-[35vh]">
+      <div className="mt-4 h-[35vh]">
         <Map coordinates={coordinates} isZoomed={!!value.address} />
       </div>
     </div>

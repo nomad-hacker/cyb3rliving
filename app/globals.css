@@ -22,8 +22,33 @@ body,
 .rdrCalendarWrapper {
   font-size: 16px !important;
   width: 100% !important;
+  background-color: hsl(var(--primary-light)) !important;
 }
 
+/* .rdrDayDisabled {
+  background-color: hsl(var(--primary-muted)) !important;
+} */
+
+/* html {
+  @apply text-gray-700;
+} */
+
+@layer base {
+  :root {
+    /* For rgb(255 115 179 / <alpha-value>) */
+    --gray: 99, 99, 99;
+
+    /* For hsl(198deg 93% 60% / <alpha-value>) */
+    --primary-highlight: 239, 100%, 61%;
+    --primary-muted: 239, 35%, 68%;
+    --primary-light: 227, 100%, 92%;
+
+    /* For rgba(255, 115, 179, <alpha-value>) */
+    --gray: 255, 115, 179;
+  }
+}
+
+/* Styling slides show for listings */
 .carousel .slider-wrapper .slide img {
   border-radius: 4px;
 }

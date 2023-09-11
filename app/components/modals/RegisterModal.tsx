@@ -16,9 +16,11 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 import Button from "../Button";
+import { useWeb3Modal } from "@web3modal/react";
 
 const RegisterModal = () => {
   const [user, setUser] = useState({ loggedIn: null, addr: null });
+  const { open, close } = useWeb3Modal();
 
   useEffect(() => fcl.currentUser.subscribe(setUser) as any, []);
 
@@ -124,7 +126,9 @@ const RegisterModal = () => {
         outline
         label="Continue with Flow"
         icon={AiFillGithub}
-        onClick={() => signIn("github")}
+        onClick={() => {
+          open();
+        }}
       />
       <div
         className="

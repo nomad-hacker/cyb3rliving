@@ -15,12 +15,14 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
 import Button from "../Button";
+import { useWeb3Modal } from "@web3modal/react";
 
 const LoginModal = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
+  const { open, close } = useWeb3Modal();
 
   const {
     register,
@@ -95,7 +97,9 @@ const LoginModal = () => {
         outline
         label="Continue with Flow Wallet"
         icon={FcGoogle}
-        onClick={() => fcl.logIn}
+        onClick={() => {
+          open();
+        }}
       />
       <div
         className="

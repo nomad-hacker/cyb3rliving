@@ -16,6 +16,8 @@ import "./globals.css";
 import ClientOnly from "./components/ClientOnly";
 import getCurrentUser from "./actions/getCurrentUser";
 
+import Wagmi from "./components/web3/wagmi";
+
 export const metadata = {
   title: "Flowairb",
   description: "A Web3 Rental Platform",
@@ -46,6 +48,7 @@ export default async function RootLayout({
           <RentModal />
           <Navbar currentUser={currentUser} user={user} />
         </ClientOnly>
+        <Wagmi />
         <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>

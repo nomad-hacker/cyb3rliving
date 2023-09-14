@@ -24,6 +24,7 @@ model User {
   accounts     Account[]
   listings     Listing[]
   reservations Reservation[]
+  applications Application[]
 }
 
 model Account {
@@ -60,7 +61,31 @@ model Listing {
   price         Int
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications Application[]
   reservations Reservation[]
+}
+
+enum ApplicationResult {
+  APPROVED
+  REJECTED
+  PENDING
+}
+
+model Application {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  listingId  String   @db.ObjectId
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int
+  result     String
+  createdAt  DateTime @default(now())
+  ApplicationResult ApplicationResult @default(PENDING)
+  approvedAt DateTime?
+  approvedBy String?
+
+  user User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Reservation {
@@ -70,6 +95,7 @@ model Reservation {
   startDate  DateTime
   endDate    DateTime
   totalPrice Int
+  stakeAmount Int
   createdAt  DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)

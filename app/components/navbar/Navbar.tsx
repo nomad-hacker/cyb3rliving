@@ -32,7 +32,14 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, user }) => {
             md:gap-0
           "
           >
-            <Logo />
+            <div
+              className="
+            text-2xl 
+            font-bold
+            "
+            >
+              NOMAD ADMISSION
+            </div>
             <Search />
             <UserMenu currentUser={currentUser} user={user} />
           </div>

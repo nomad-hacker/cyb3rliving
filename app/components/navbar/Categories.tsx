@@ -47,9 +47,24 @@ export const categories = [
     description: "This property offers camping activities!",
   },
   {
-    label: "Lux",
+    label: "High End",
     icon: IoDiamond,
     description: "This property is brand new and luxurious!",
+  },
+  {
+    label: "7AM Club",
+    icon: IoDiamond,
+    description: "This property is brand new",
+  },
+  {
+    label: "Chinese Speaking",
+    icon: IoDiamond,
+    description: "This property is brand new",
+  },
+  {
+    label: "Crazy Artist",
+    icon: GiWindmill,
+    description: "This property is has windmills!",
   },
 ];
 

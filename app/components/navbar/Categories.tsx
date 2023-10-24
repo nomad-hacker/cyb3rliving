@@ -37,7 +37,7 @@ export const categories = [
     description: "This property is modern!",
   },
   {
-    label: "Cat Lovers",
+    label: "4 Seas",
     icon: TbMountain,
     description: "This property is in the countryside!",
   },
